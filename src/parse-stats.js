@@ -165,7 +165,7 @@ function generateReport(currentRoutes, baselineRoutes, threshold = 0, budgetPerc
     return markdown;
   }
 
-  markdown += '| Route | Size (gzipped) | Diff (vs main) |\n|---|---|---|\n';
+  markdown += '| Route | Size (gzipped) | Diff (vs baseline) |\n|---|---|---|\n';
   markdown += changedRows.join('\n') + '\n';
 
   return markdown;

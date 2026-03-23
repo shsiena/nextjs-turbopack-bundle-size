@@ -215,7 +215,7 @@ describe('generateReport', () => {
   test('includes header rows when there are changes', () => {
     const report = generateReport({ '/': { gzip: 512 } }, {});
     assert.ok(report.includes('## 📦 Next.js App Router Sizes (Turbopack)'));
-    assert.ok(report.includes('| Route | Size (gzipped) | Diff (vs main) |'));
+    assert.ok(report.includes('| Route | Size (gzipped) | Diff (vs baseline) |'));
   });
 
   test('shows warning when no routes at all', () => {
@@ -323,7 +323,7 @@ describe('generateReport full table', () => {
     assert.equal(
       generateReport({ 'global': { gzip: 5000 }, '/': { gzip: 512 } }, {}),
       REPORT_HEADER +
-        '| Route | Size (gzipped) | Diff (vs main) |\n' +
+        '| Route | Size (gzipped) | Diff (vs baseline) |\n' +
         '|---|---|---|\n' +
         '| `global` | `4.88 KB` | 🆕 New |\n' +
         '| `/` | `512 B` | 🆕 New |\n',
@@ -334,7 +334,7 @@ describe('generateReport full table', () => {
     assert.equal(
       generateReport({}, { '/old': { gzip: 500 } }),
       REPORT_HEADER +
-        '| Route | Size (gzipped) | Diff (vs main) |\n' +
+        '| Route | Size (gzipped) | Diff (vs baseline) |\n' +
         '|---|---|---|\n' +
         '| `/old` | — | 🗑️ Removed |\n',
     );
@@ -347,7 +347,7 @@ describe('generateReport full table', () => {
         { 'global': { gzip: 5000 }, '/': { gzip: 1024 } },
       ),
       REPORT_HEADER +
-        '| Route | Size (gzipped) | Diff (vs main) |\n' +
+        '| Route | Size (gzipped) | Diff (vs baseline) |\n' +
         '|---|---|---|\n' +
         '| `/` | `1.5 KB` | 🔴 `+512 B` (+50%) |\n',
     );
@@ -360,7 +360,7 @@ describe('generateReport full table', () => {
         { 'global': { gzip: 5000 }, '/': { gzip: 1024 } },
       ),
       REPORT_HEADER +
-        '| Route | Size (gzipped) | Diff (vs main) |\n' +
+        '| Route | Size (gzipped) | Diff (vs baseline) |\n' +
         '|---|---|---|\n' +
         '| `/` | `512 B` | 🟢 `-512 B` (-50%) |\n',
     );
@@ -384,7 +384,7 @@ describe('generateReport full table', () => {
     assert.equal(
       generateReport(current, baseline),
       REPORT_HEADER +
-        '| Route | Size (gzipped) | Diff (vs main) |\n' +
+        '| Route | Size (gzipped) | Diff (vs baseline) |\n' +
         '|---|---|---|\n' +
         '| `global` | `5 KB` | 🔴 `+120 B` (+2.4%) |\n' +
         '| `/about` | `2 KB` | 🔴 `+1 KB` (+100%) |\n' +
@@ -408,7 +408,7 @@ describe('generateReport full table', () => {
     assert.equal(
       generateReport(current, baseline, 500),
       REPORT_HEADER +
-        '| Route | Size (gzipped) | Diff (vs main) |\n' +
+        '| Route | Size (gzipped) | Diff (vs baseline) |\n' +
         '|---|---|---|\n' +
         '| `/large` | `1.98 KB` | 🔴 `+1000 B` (+97.7%) |\n',
     );
@@ -428,7 +428,7 @@ describe('generateReport full table', () => {
     assert.equal(
       generateReport(current, baseline, 0, 20),
       REPORT_HEADER +
-        '| Route | Size (gzipped) | Diff (vs main) |\n' +
+        '| Route | Size (gzipped) | Diff (vs baseline) |\n' +
         '|---|---|---|\n' +
         '| `/minor` | `1.07 KB` | 🟡 `+100 B` (+10%) |\n' +
         '| `/major` | `1.46 KB` | 🔴 `+500 B` (+50%) |\n',
